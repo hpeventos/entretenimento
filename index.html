@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HP Eventos — Vaquinha</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#0a0a0a;
+    --panel:#131313;
+    --panel2:#1c1c1c;
+    --line:#2b2b2b;
+    --white:#f5f5f5;
+    --gray:#8f8f8f;
+    --acid:#c8ff3d;
+    --red:#ff4d4d;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:#000;
+    display:flex;
+    justify-content:center;
+    padding:32px 12px;
+    font-family:'Inter',sans-serif;
+  }
+  .phone{
+    width:380px;
+    min-height:800px;
+    background:var(--black);
+    overflow:hidden;
+    position:relative;
+    color:var(--white);
+  }
+  .scroll{
+    height:800px;
+    overflow-y:auto;
+    padding-bottom:100px;
+  }
+  .scroll::-webkit-scrollbar{display:none;}
+
+  /* HEADER */
+  header{
+    padding:44px 20px 18px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-bottom:1px solid var(--line);
+  }
+  .brand{display:flex; align-items:center; gap:8px;}
+  .brand-mark{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:26px;
+    letter-spacing:1px;
+    line-height:1;
+    transform:skewX(-8deg);
+  }
+  .brand-sub{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:9px;
+    letter-spacing:4px;
+    color:var(--gray);
+    margin-top:2px;
+  }
+  .menu-dot{width:34px; height:34px; border:1px solid var(--line); border-radius:50%; display:flex; align-items:center; justify-content:center;}
+  .menu-dot span{width:14px; height:1.5px; background:var(--white); position:relative;}
+  .menu-dot span::before, .menu-dot span::after{content:'';position:absolute; left:0; width:14px; height:1.5px; background:var(--white);}
+  .menu-dot span::before{top:-4px;}
+  .menu-dot span::after{top:4px;}
+
+  /* HERO */
+  .hero{padding:26px 20px 8px;}
+  .eyebrow{
+    font-family:'Bebas Neue',sans-serif;
+    letter-spacing:3px;
+    font-size:11px;
+    color:var(--acid);
+    margin-bottom:10px;
+  }
+  .hero h1{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:40px;
+    line-height:0.92;
+    letter-spacing:0.5px;
+  }
+  .hero p{
+    color:var(--gray);
+    font-size:13px;
+    line-height:1.55;
+    margin-top:12px;
+    max-width:300px;
+  }
+
+  /* LIVE STRIP */
+  .live-strip{
+    margin:20px 20px 4px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-family:'Bebas Neue',sans-serif;
+    font-size:11px;
+    letter-spacing:2px;
+    color:var(--red);
+  }
+  .live-dot{width:6px; height:6px; background:var(--red); border-radius:50%; animation:pulse 1.4s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.25;}}
+
+  /* CARDS */
+  .cards{padding:18px 20px 10px; display:flex; flex-direction:column; gap:16px;}
+  .card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:18px 18px 20px;
+    position:relative;
+    overflow:hidden;
+  }
+  .card-tag{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:10px;
+    letter-spacing:2px;
+    color:var(--gray);
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:10px;
+  }
+  .card-tag .end{color:var(--acid);}
+  .card h3{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:22px;
+    letter-spacing:0.3px;
+    line-height:1.05;
+    margin-bottom:14px;
+  }
+
+  .versus{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:16px;
+  }
+  .side{
+    flex:1;
+    background:var(--panel2);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:12px 10px;
+    text-align:center;
+  }
+  .side .name{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:15px;
+    letter-spacing:0.5px;
+  }
+  .side .amt{
+    font-size:16px;
+    font-weight:800;
+    margin-top:6px;
+  }
+  .side .pct{font-size:10px; color:var(--gray); margin-top:2px;}
+  .vs-mark{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:12px;
+    color:var(--gray);
+    letter-spacing:1px;
+    transform:skewX(-8deg);
+  }
+
+  .bar{
+    height:8px;
+    border-radius:6px;
+    background:var(--panel2);
+    overflow:hidden;
+    display:flex;
+    margin-bottom:14px;
+    border:1px solid var(--line);
+  }
+  .bar .fill-a{background:var(--acid); height:100%;}
+  .bar .fill-b{background:var(--gray); height:100%;}
+
+  .card-foot{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .total{
+    font-size:11px;
+    color:var(--gray);
+  }
+  .total b{color:var(--white); font-size:13px;}
+  .cta{
+    background:var(--white);
+    color:#000;
+    font-family:'Bebas Neue',sans-serif;
+    font-size:13px;
+    letter-spacing:1.5px;
+    padding:10px 18px;
+    border-radius:999px;
+    border:none;
+  }
+
+  /* DISCLAIMER */
+  .disclaimer{
+    margin:6px 20px 20px;
+    padding:14px 16px;
+    border:1px dashed var(--line);
+    border-radius:14px;
+    font-size:10.5px;
+    line-height:1.6;
+    color:var(--gray);
+  }
+  .disclaimer b{color:var(--white);}
+
+  /* HOW IT WORKS */
+  .section-title{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:12px;
+    letter-spacing:3px;
+    color:var(--gray);
+    padding:6px 20px 12px;
+  }
+  .steps{padding:0 20px 20px; display:flex; flex-direction:column; gap:10px;}
+  .step{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:12px 14px;
+  }
+  .step .n{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:18px;
+    color:var(--acid);
+    width:22px;
+  }
+  .step .t{font-size:12.5px; color:#d9d9d9; line-height:1.4;}
+
+  /* BOTTOM NAV */
+  .nav{
+    position:absolute;
+    bottom:0; left:0; right:0;
+    background:rgba(10,10,10,.92);
+    backdrop-filter:blur(6px);
+    border-top:1px solid var(--line);
+    padding:14px 20px 20px;
+    display:flex;
+    justify-content:center;
+    gap:60px;
+  }
+  .nav-item{
+    display:flex; flex-direction:column; align-items:center; gap:5px;
+    font-size:9px; letter-spacing:1px; color:var(--gray);
+    font-family:'Bebas Neue',sans-serif;
+  }
+  .nav-item.active{color:var(--white);}
+  .nav-ico{width:18px; height:18px; border:1.5px solid currentColor; border-radius:6px;}
+
+  /* VIEWS */
+  .view{display:none;}
+  .view.active{display:block;}
+
+  .page-head{
+    padding:44px 20px 4px;
+  }
+  .page-head .eyebrow{
+    font-family:'Bebas Neue',sans-serif;
+    letter-spacing:3px;
+    font-size:11px;
+    color:var(--acid);
+    margin-bottom:6px;
+  }
+  .page-head h2{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:32px;
+    letter-spacing:0.5px;
+  }
+
+  .mini-tag{
+    display:inline-block;
+    font-family:'Bebas Neue',sans-serif;
+    font-size:9px;
+    letter-spacing:1.5px;
+    color:var(--black);
+    background:var(--acid);
+    padding:3px 8px;
+    border-radius:999px;
+    margin:16px 20px 0;
+  }
+
+  /* PIX MODAL */
+  .overlay{
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,.6);
+    z-index:50;
+    display:none;
+    align-items:flex-end;
+  }
+  .overlay.active{display:flex;}
+  .sheet{
+    width:100%;
+    max-height:88%;
+    background:var(--black);
+    border-top:1px solid var(--line);
+    border-radius:24px 24px 0 0;
+    padding:18px 20px 26px;
+    overflow-y:auto;
+    animation:slideup .25s ease;
+  }
+  @keyframes slideup{from{transform:translateY(24px); opacity:0;} to{transform:translateY(0); opacity:1;}}
+  .sheet-grip{width:36px; height:4px; background:var(--line); border-radius:4px; margin:0 auto 16px;}
+  .sheet-head{
+    display:flex; align-items:center; justify-content:space-between;
+    margin-bottom:18px;
+  }
+  .sheet-head h2{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:22px;
+    letter-spacing:0.5px;
+  }
+  .sheet-close{
+    width:28px; height:28px;
+    border:1px solid var(--line);
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:14px; color:var(--gray);
+  }
+  .sheet-label{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:11px;
+    letter-spacing:2px;
+    color:var(--gray);
+    margin:18px 0 10px;
+  }
+  .sheet-label:first-of-type{margin-top:0;}
+
+  .side-picker{display:flex; gap:10px;}
+  .side-opt{
+    flex:1;
+    background:var(--panel);
+    border:1.5px solid var(--line);
+    border-radius:14px;
+    padding:16px 10px;
+    text-align:center;
+    font-family:'Bebas Neue',sans-serif;
+    font-size:26px;
+    color:var(--white);
+  }
+  .side-opt .lbl{
+    display:block;
+    font-size:10px;
+    letter-spacing:1.5px;
+    color:var(--gray);
+    margin-top:6px;
+    font-family:'Bebas Neue',sans-serif;
+  }
+  .side-opt.selected{border-color:var(--acid); background:#1a2006;}
+  .side-opt.selected .lbl{color:var(--acid);}
+
+  .amount-chips{display:flex; gap:8px; flex-wrap:wrap;}
+  .chip{
+    background:var(--panel);
+    border:1.5px solid var(--line);
+    border-radius:999px;
+    padding:9px 16px;
+    font-size:13px;
+    font-weight:700;
+    color:var(--white);
+  }
+  .chip.selected{border-color:var(--acid); color:var(--acid); background:#1a2006;}
+
+  .custom-amount{
+    margin-top:10px;
+    display:flex;
+    align-items:center;
+    background:var(--panel);
+    border:1.5px solid var(--line);
+    border-radius:12px;
+    padding:12px 14px;
+  }
+  .custom-amount span{font-size:14px; color:var(--gray); margin-right:6px;}
+  .custom-amount input{
+    background:transparent;
+    border:none;
+    outline:none;
+    color:var(--white);
+    font-size:15px;
+    font-weight:700;
+    width:100%;
+    font-family:'Inter',sans-serif;
+  }
+
+  .sheet-cta{
+    width:100%;
+    background:var(--acid);
+    color:#0a0a0a;
+    font-family:'Bebas Neue',sans-serif;
+    font-size:15px;
+    letter-spacing:1.5px;
+    padding:15px;
+    border-radius:14px;
+    border:none;
+    margin-top:22px;
+  }
+  .sheet-cta:disabled{background:var(--panel2); color:var(--gray);}
+  .sheet-cta.ghost{
+    background:transparent;
+    border:1.5px solid var(--line);
+    color:var(--white);
+    margin-top:10px;
+  }
+
+  .pix-summary{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:14px 16px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:16px;
+  }
+  .pix-summary .lado{font-family:'Bebas Neue',sans-serif; font-size:22px;}
+  .pix-summary .valor{font-size:18px; font-weight:800; color:var(--acid);}
+
+  .pix-code-box{
+    background:var(--panel);
+    border:1px dashed var(--line);
+    border-radius:12px;
+    padding:12px 14px;
+    font-size:10.5px;
+    color:var(--gray);
+    word-break:break-all;
+    line-height:1.5;
+    margin-bottom:10px;
+    font-family:monospace;
+  }
+  .copy-btn{
+    width:100%;
+    background:var(--panel2);
+    color:var(--white);
+    border:1px solid var(--line);
+    font-family:'Bebas Neue',sans-serif;
+    font-size:12px;
+    letter-spacing:1.5px;
+    padding:12px;
+    border-radius:12px;
+  }
+  .copy-btn.copied{border-color:var(--acid); color:var(--acid);}
+
+  .pix-hint{
+    font-size:11px;
+    color:var(--gray);
+    line-height:1.6;
+    margin:16px 0 4px;
+    text-align:center;
+  }
+
+  /* SUCCESS TOAST */
+  .toast{
+    position:absolute;
+    left:20px; right:20px;
+    bottom:18px;
+    background:var(--acid);
+    color:#0a0a0a;
+    border-radius:14px;
+    padding:14px 16px;
+    font-size:12.5px;
+    font-weight:700;
+    z-index:60;
+    display:none;
+    box-shadow:0 10px 24px rgba(0,0,0,.4);
+  }
+  .toast.active{display:block; animation:slideup .25s ease;}
+
+  /* WAIT STATUS (aguardando confirmação do backend) */
+  .wait-status{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    margin-top:16px;
+    padding:13px 14px;
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:12px;
+    font-size:12px;
+    color:var(--gray);
+  }
+  .wait-status.confirmed{border-color:var(--acid); color:var(--acid); background:#1a2006;}
+  .wait-status.error{border-color:var(--red); color:var(--red); background:#2a0f0f;}
+  .spinner{
+    width:14px; height:14px;
+    border:2px solid var(--line);
+    border-top-color:var(--acid);
+    border-radius:50%;
+    animation:spin .7s linear infinite;
+    flex-shrink:0;
+  }
+  .wait-status.confirmed .spinner, .wait-status.error .spinner{display:none;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="scroll">
+
+  <div class="view active" id="view-inicio">
+
+    <header>
+      <div class="brand">
+        <div>
+          <div class="brand-mark">HP</div>
+          <div class="brand-sub">EVENTOS</div>
+        </div>
+      </div>
+      <div class="menu-dot"><span></span></div>
+    </header>
+
+    <div class="hero">
+      <div class="eyebrow">VAQUINHA DA ZOEIRA</div>
+      <h1>ESCOLHA<br>SEU LADO.<br>FAÇA O PIX.</h1>
+      <p>Arrecadações de apoio e zoeira entre amigos. Sem sorteio, sem prêmio — é só pra ver quem grita mais alto.</p>
+    </div>
+
+    <div class="live-strip"><div class="live-dot"></div> 1 DISPUTA ROLANDO AGORA</div>
+
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-tag"><span>DISPUTA DA ZOEIRA</span><span class="end">ENCERRA EM 4H</span></div>
+        <h3>QUEM GRITA<br>MAIS ALTO?</h3>
+        <div class="versus">
+          <div class="side">
+            <div class="name">🇧🇷</div>
+            <div class="amt js-amt-a">R$ 0</div>
+            <div class="pct js-pct-a">0%</div>
+          </div>
+          <div class="vs-mark">VS</div>
+          <div class="side">
+            <div class="name">🌟</div>
+            <div class="amt js-amt-b">R$ 0</div>
+            <div class="pct js-pct-b">0%</div>
+          </div>
+        </div>
+        <div class="bar"><div class="fill-a js-fill-a" style="width:0%"></div><div class="fill-b js-fill-b" style="width:0%"></div></div>
+        <div class="card-foot">
+          <div class="total">Arrecadado <b class="js-total">R$ 0</b></div>
+          <button class="cta" onclick="openPixModal()">FAZER PIX</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="disclaimer">
+      <b>Isso aqui não é aposta.</b> É uma vaquinha de apoio/zoeira entre torcedores. O valor arrecadado não gera prêmio, sorteio ou retorno financeiro para quem participa — é só pra fazer barulho pelo seu lado.
+    </div>
+
+    <div class="section-title">COMO FUNCIONA</div>
+    <div class="steps">
+      <div class="step"><div class="n">01</div><div class="t">Escolha a disputa e o lado que você torce</div></div>
+      <div class="step"><div class="n">02</div><div class="t">Faça o Pix — o valor é somado ao placar do seu lado, na hora</div></div>
+      <div class="step"><div class="n">03</div><div class="t">Acompanhe o placar ao vivo e zoa a galera do outro lado</div></div>
+    </div>
+
+  </div>
+
+  <div class="view" id="view-disputas">
+
+    <div class="page-head">
+      <div class="eyebrow">TODAS AS DISPUTAS</div>
+      <h2>DISPUTAS</h2>
+    </div>
+
+    <div class="mini-tag">ROLANDO AGORA</div>
+
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-tag"><span>DISPUTA DA ZOEIRA</span><span class="end">ENCERRA EM 4H</span></div>
+        <h3>QUEM GRITA<br>MAIS ALTO?</h3>
+        <div class="versus">
+          <div class="side">
+            <div class="name">🇧🇷</div>
+            <div class="amt js-amt-a">R$ 0</div>
+            <div class="pct js-pct-a">0%</div>
+          </div>
+          <div class="vs-mark">VS</div>
+          <div class="side">
+            <div class="name">🌟</div>
+            <div class="amt js-amt-b">R$ 0</div>
+            <div class="pct js-pct-b">0%</div>
+          </div>
+        </div>
+        <div class="bar"><div class="fill-a js-fill-a" style="width:0%"></div><div class="fill-b js-fill-b" style="width:0%"></div></div>
+        <div class="card-foot">
+          <div class="total">Arrecadado <b class="js-total">R$ 0</b></div>
+          <button class="cta" onclick="openPixModal()">FAZER PIX</button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  </div>
+
+  <div class="nav">
+    <div class="nav-item active" data-view="inicio"><div class="nav-ico"></div>INÍCIO</div>
+    <div class="nav-item" data-view="disputas"><div class="nav-ico"></div>DISPUTAS</div>
+  </div>
+
+  <!-- PIX MODAL -->
+  <div class="overlay" id="pix-overlay">
+    <div class="sheet">
+      <div class="sheet-grip"></div>
+
+      <!-- STEP 1: escolher lado e valor -->
+      <div id="pix-step1">
+        <div class="sheet-head">
+          <h2>FAÇA SEU PIX</h2>
+          <div class="sheet-close" onclick="closePixModal()">✕</div>
+        </div>
+
+        <div class="sheet-label">ESCOLHA SEU LADO</div>
+        <div class="side-picker">
+          <div class="side-opt" id="opt-a" onclick="selectSide('a')">🇧🇷<span class="lbl">BRASIL</span></div>
+          <div class="side-opt" id="opt-b" onclick="selectSide('b')">🌟<span class="lbl">ESTRELA</span></div>
+        </div>
+
+        <div class="sheet-label">QUANTO VOCÊ QUER MANDAR?</div>
+        <div class="amount-chips">
+          <div class="chip" onclick="selectAmount(10)">R$ 10</div>
+          <div class="chip" onclick="selectAmount(20)">R$ 20</div>
+          <div class="chip" onclick="selectAmount(50)">R$ 50</div>
+          <div class="chip" onclick="selectAmount(100)">R$ 100</div>
+        </div>
+        <div class="custom-amount">
+          <span>R$</span>
+          <input type="number" id="custom-amount-input" placeholder="Outro valor" min="1" oninput="selectCustomAmount(this.value)">
+        </div>
+
+        <button class="sheet-cta" id="btn-gerar-pix" disabled onclick="generatePix()">GERAR PIX</button>
+      </div>
+
+      <!-- STEP 2: pix copia e cola -->
+      <div id="pix-step2" style="display:none;">
+        <div class="sheet-head">
+          <h2>PIX GERADO</h2>
+          <div class="sheet-close" onclick="closePixModal()">✕</div>
+        </div>
+
+        <div class="pix-summary">
+          <div class="lado"><span id="resumo-lado-icon">🇧🇷</span> <span id="resumo-lado-nome">BRASIL</span></div>
+          <div class="valor" id="resumo-valor">R$ 0</div>
+        </div>
+
+        <div class="sheet-label">PIX COPIA E COLA</div>
+        <div class="pix-code-box" id="pix-code"></div>
+        <button class="copy-btn" id="copy-btn" onclick="copyPixCode()">COPIAR CÓDIGO</button>
+
+        <div class="pix-hint">Abra o app do seu banco, escolha Pix Copia e Cola e cole o código acima. O valor já vem preenchido.</div>
+
+        <div class="wait-status" id="wait-status">
+          <div class="spinner"></div>
+          <span id="wait-status-text">Aguardando confirmação do pagamento...</span>
+        </div>
+
+        <button class="sheet-cta ghost" id="btn-cancelar-pix" onclick="closePixModal()">CANCELAR</button>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+</div>
+<script>
+  // -----------------------------------------------------------------------
+  // Configuração: URL do backend (Node + Mercado Pago).
+  // Depois de fazer o deploy do backend (pasta hp-eventos-backend), troque
+  // esse valor pela URL pública dele, ex:
+  // var API_BASE_URL = 'https://sua-vaquinha.onrender.com';
+  // -----------------------------------------------------------------------
+  var API_BASE_URL = 'https://backend-pagamentos-msey.onrender.com';
+
+  var disputa = { a: 0, b: 0 };
+  var pixSelection = { side: null, amount: null };
+  var pollTimer = null;
+  var currentPaymentId = null;
+
+  function fmtBRL(v){
+    return 'R$ ' + v.toLocaleString('pt-BR', {minimumFractionDigits: v % 1 === 0 ? 0 : 2});
+  }
+
+  function renderDisputa(){
+    var total = disputa.a + disputa.b;
+    var pctA = total > 0 ? Math.round((disputa.a / total) * 100) : 0;
+    var pctB = total > 0 ? 100 - pctA : 0;
+
+    document.querySelectorAll('.js-amt-a').forEach(function(el){ el.textContent = fmtBRL(disputa.a); });
+    document.querySelectorAll('.js-amt-b').forEach(function(el){ el.textContent = fmtBRL(disputa.b); });
+    document.querySelectorAll('.js-pct-a').forEach(function(el){ el.textContent = pctA + '%'; });
+    document.querySelectorAll('.js-pct-b').forEach(function(el){ el.textContent = pctB + '%'; });
+    document.querySelectorAll('.js-fill-a').forEach(function(el){ el.style.width = pctA + '%'; });
+    document.querySelectorAll('.js-fill-b').forEach(function(el){ el.style.width = pctB + '%'; });
+    document.querySelectorAll('.js-total').forEach(function(el){ el.textContent = fmtBRL(total); });
+  }
+
+  // Busca o placar real no backend. Chamada ao carregar a página e depois
+  // de cada pagamento confirmado, pra refletir o estado de verdade (o
+  // backend é a fonte da verdade agora, não mais o navegador).
+  function fetchDisputa(){
+    fetch(API_BASE_URL + '/api/disputa')
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        disputa = data;
+        renderDisputa();
+      })
+      .catch(function(err){
+        console.warn('Não foi possível buscar o placar do backend:', err);
+      });
+  }
+
+  function openPixModal(){
+    pixSelection = { side: null, amount: null };
+    currentPaymentId = null;
+    stopPolling();
+
+    document.getElementById('opt-a').classList.remove('selected');
+    document.getElementById('opt-b').classList.remove('selected');
+    document.querySelectorAll('.chip').forEach(function(c){ c.classList.remove('selected'); });
+    document.getElementById('custom-amount-input').value = '';
+    document.getElementById('btn-gerar-pix').disabled = false;
+    document.getElementById('btn-gerar-pix').textContent = 'GERAR PIX';
+    updateGerarPixState();
+
+    document.getElementById('pix-step1').style.display = 'block';
+    document.getElementById('pix-step2').style.display = 'none';
+    document.getElementById('pix-overlay').classList.add('active');
+  }
+
+  function closePixModal(){
+    stopPolling();
+    document.getElementById('pix-overlay').classList.remove('active');
+  }
+
+  function selectSide(side){
+    pixSelection.side = side;
+    document.getElementById('opt-a').classList.toggle('selected', side === 'a');
+    document.getElementById('opt-b').classList.toggle('selected', side === 'b');
+    updateGerarPixState();
+  }
+
+  function selectAmount(value){
+    pixSelection.amount = value;
+    document.getElementById('custom-amount-input').value = '';
+    document.querySelectorAll('.chip').forEach(function(c){
+      c.classList.toggle('selected', c.textContent.replace(/\s/g,'') === ('R$' + value));
+    });
+    updateGerarPixState();
+  }
+
+  function selectCustomAmount(value){
+    var num = parseFloat(value);
+    pixSelection.amount = num > 0 ? num : null;
+    document.querySelectorAll('.chip').forEach(function(c){ c.classList.remove('selected'); });
+    updateGerarPixState();
+  }
+
+  function updateGerarPixState(){
+    document.getElementById('btn-gerar-pix').disabled = !(pixSelection.side && pixSelection.amount > 0);
+  }
+
+  // ---------------------------------------------------------------------
+  // Gera o Pix chamando o backend (que por sua vez chama o Mercado Pago).
+  // O código retornado já vem com o valor embutido e é válido de verdade -
+  // o pagamento cai direto na conta configurada no backend.
+  // ---------------------------------------------------------------------
+  function generatePix(){
+    var btn = document.getElementById('btn-gerar-pix');
+    btn.disabled = true;
+    btn.textContent = 'GERANDO...';
+
+    fetch(API_BASE_URL + '/api/pix/create', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ side: pixSelection.side, amount: pixSelection.amount })
+    })
+      .then(function(r){
+        if(!r.ok) throw new Error('Falha ao gerar Pix');
+        return r.json();
+      })
+      .then(function(data){
+        currentPaymentId = data.paymentId;
+
+        var isA = pixSelection.side === 'a';
+        document.getElementById('resumo-lado-icon').textContent = isA ? '🇧🇷' : '🌟';
+        document.getElementById('resumo-lado-nome').textContent = isA ? 'BRASIL' : 'ESTRELA';
+        document.getElementById('resumo-valor').textContent = fmtBRL(pixSelection.amount);
+        document.getElementById('pix-code').textContent = data.qrCode;
+        document.getElementById('copy-btn').textContent = 'COPIAR CÓDIGO';
+        document.getElementById('copy-btn').classList.remove('copied');
+
+        setWaitStatus('waiting', 'Aguardando confirmação do pagamento...');
+        document.getElementById('btn-cancelar-pix').style.display = 'block';
+
+        document.getElementById('pix-step1').style.display = 'none';
+        document.getElementById('pix-step2').style.display = 'block';
+
+        startPolling();
+      })
+      .catch(function(err){
+        console.error(err);
+        alert('Não foi possível gerar o Pix agora. Confira se o backend está rodando e tente de novo.');
+        btn.disabled = false;
+        btn.textContent = 'GERAR PIX';
+      });
+  }
+
+  function copyPixCode(){
+    var code = document.getElementById('pix-code').textContent;
+    var btn = document.getElementById('copy-btn');
+    function marcarCopiado(){
+      btn.textContent = 'CÓDIGO COPIADO';
+      btn.classList.add('copied');
+    }
+    if(navigator.clipboard){
+      navigator.clipboard.writeText(code).then(marcarCopiado).catch(marcarCopiado);
+    } else {
+      marcarCopiado();
+    }
+  }
+
+  function setWaitStatus(kind, text){
+    var box = document.getElementById('wait-status');
+    box.classList.remove('confirmed', 'error');
+    if(kind === 'confirmed') box.classList.add('confirmed');
+    if(kind === 'error') box.classList.add('error');
+    document.getElementById('wait-status-text').textContent = text;
+  }
+
+  // ---------------------------------------------------------------------
+  // Fica perguntando ao backend, de tempos em tempos, se o pagamento já
+  // foi aprovado. Quando o Mercado Pago confirma (via webhook, do lado do
+  // servidor), esse polling detecta a mudança de status e credita no
+  // placar automaticamente - sem a pessoa precisar clicar em nada.
+  // ---------------------------------------------------------------------
+  function startPolling(){
+    stopPolling();
+    pollTimer = setInterval(function(){
+      if(!currentPaymentId) return;
+
+      fetch(API_BASE_URL + '/api/pix/status/' + currentPaymentId)
+        .then(function(r){ return r.json(); })
+        .then(function(data){
+          if(data.status === 'approved'){
+            stopPolling();
+            setWaitStatus('confirmed', 'Pagamento confirmado! Atualizando placar...');
+            document.getElementById('btn-cancelar-pix').style.display = 'none';
+            fetchDisputa();
+            setTimeout(function(){
+              closePixModal();
+              showToast();
+            }, 900);
+          } else if(data.status === 'rejected' || data.status === 'cancelled'){
+            stopPolling();
+            setWaitStatus('error', 'Pagamento não foi concluído. Você pode gerar um novo Pix.');
+            document.getElementById('btn-cancelar-pix').style.display = 'block';
+          }
+        })
+        .catch(function(err){
+          console.warn('Erro ao consultar status do pagamento:', err);
+        });
+    }, 3000);
+  }
+
+  function stopPolling(){
+    if(pollTimer){
+      clearInterval(pollTimer);
+      pollTimer = null;
+    }
+  }
+
+  function showToast(){
+    var isA = pixSelection.side === 'a';
+    var toast = document.getElementById('toast');
+    toast.innerHTML = 'PIX CONFIRMADO! Seu apoio de ' + fmtBRL(pixSelection.amount) + ' pro ' + (isA ? '🇧🇷 BRASIL' : '🌟 ESTRELA') + ' já está no placar.';
+    toast.classList.add('active');
+    setTimeout(function(){ toast.classList.remove('active'); }, 3200);
+  }
+
+  document.querySelectorAll('.nav-item').forEach(function(item){
+    item.addEventListener('click', function(){
+      var target = item.getAttribute('data-view');
+      var view = document.getElementById('view-' + target);
+      if(!view) return; // ranking/perfil ainda não têm tela
+
+      document.querySelectorAll('.nav-item').forEach(function(n){ n.classList.remove('active'); });
+      item.classList.add('active');
+
+      document.querySelectorAll('.view').forEach(function(v){ v.classList.remove('active'); });
+      view.classList.add('active');
+
+      document.querySelector('.scroll').scrollTop = 0;
+    });
+  });
+
+  // Estado inicial: busca o placar real do backend. Se o backend ainda não
+  // estiver rodando/deployado, fica em R$0 (fallback silencioso).
+  fetchDisputa();
+  // Mantém o placar sincronizado entre pessoas diferentes olhando a página.
+  setInterval(fetchDisputa, 15000);
+</script>
+</body>
+</html>
